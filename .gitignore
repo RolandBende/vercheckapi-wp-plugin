@@ -1,0 +1,36 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# composer
+vendor/
+composer.lock
+
+# npm
+node_modules/
+
+# log files and databases
+*.log
+*.sql
+*.sqlite
+
+# editor files
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+.sublimelinterrc
+.project
+*.komodoproject
+project.xml
+project.properties
+
+# compressed files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip

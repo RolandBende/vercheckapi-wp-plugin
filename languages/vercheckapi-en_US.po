@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VerCheck API 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-24 00:00+0000\n"
+"PO-Revision-Date: 2025-05-24 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e\n"
+
+#: includes/class-vc-api-admin.php:27
+msgid "%s Settings"
+msgstr ""
+
+#: includes/class-vc-api-admin.php:54
+msgid "Token must be at least 32 characters long and contain only valid characters (letters, numbers, dashes, underscores, dots)."
+msgstr ""
+
+#: includes/class-vc-api-admin.php:97
+msgid "The token must be at least 32 characters long."
+msgstr ""
+
+#: includes/class-vc-api-admin.php:107
+msgid "The token contains invalid characters. Allowed are letters, numbers, dots, dashes and underscores."
+msgstr ""
