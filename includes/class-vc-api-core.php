@@ -22,14 +22,6 @@ class VC_API_Core
         add_action('rest_api_init', [$this, 'register_rest_endpoint']);
     }
 
-    public function load_textdomain() {
-        load_plugin_textdomain(
-            self::PLUGIN_TEXT_DOMAIN,
-            false,
-            dirname(plugin_basename(__FILE__)) . '/languages'
-        );
-    }
-
     public function register_rest_endpoint()
     {
         register_rest_route(self::API_BASE_ROUTE.'/v'.self::API_VERSION, '/status', [

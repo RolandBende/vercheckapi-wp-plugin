@@ -2,11 +2,11 @@
 Contributors: rolandbende
 Donate link: https://rolandbende.com/
 Tags: versioncheck, healthcheck
-Requires at least: 4.7
+Requires at least: 5.2
 Tested up to: 6.8
 Stable tag: 1.0.0
 Requires PHP: 7.4
-License: GPLv3
+License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl.html
 
 Version check REST API endpoint for WordPress.
