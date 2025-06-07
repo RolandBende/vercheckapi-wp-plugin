@@ -27,30 +27,26 @@ The JSON response includes:
 
 **Response example:**
 
-```json
-{
-  "core": {
-    "current_version": "6.4.3",
-    "new_version": "6.5",
-    "is_outdated": true
-  },
-  "outdated_plugins": [
-    {
-      "name": "Example Plugin",
-      "current_version": "1.2.0",
-      "new_version": "1.3.0"
-    }
-  ],
-  "outdated_themes": []
-}
-```
+  {
+    "core": {
+      "current_version": "6.4.3",
+      "new_version": "6.5",
+      "is_outdated": true
+    },
+    "outdated_plugins": [
+      {
+        "name": "Example Plugin",
+        "current_version": "1.2.0",
+        "new_version": "1.3.0"
+      }
+    ],
+    "outdated_themes": []
+  }
 
 **Additional info:**
 The unique request ID for each API call is returned in the response header:
 
-```
-X-Request-ID: <unique-request-id>
-```
+  X-Request-ID: <unique-request-id>
 
 Useful for remote monitoring, CI/CD checks, and automated update workflows.
 
