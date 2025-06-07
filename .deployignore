@@ -1,0 +1,14 @@
+.git/
+.github/
+composer.json
+composer.lock
+phpcs.xml
+phpunit.xml
+README.md
+readme.md
+node_modules/
+vendor/
+scripts/
+tests/
+build/
+.env
