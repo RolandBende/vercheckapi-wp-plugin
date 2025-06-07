@@ -1,0 +1,19 @@
+name: Deploy to WordPress.org
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    name: Deploy plugin
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check version consistency
+        run: ./scripts/plugin-version-check.sh

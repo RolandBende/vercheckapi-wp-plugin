@@ -1,0 +1,27 @@
+name: Test WordPress Deploy (Dry Run)
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  test-deploy:
+    name: Dry-run deploy test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check version consistency
+        run: ./scripts/plugin-version-check.sh
+
+      - name: Deploy to WordPress SVN (dry-run)
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+            dry-run: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: ${{ vars.WP_PLUGIN_SLUG }}
