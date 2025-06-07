@@ -1,6 +1,17 @@
 {
+    "name": "rolandbende/vercheck-api",
+    "type": "wordpress-plugin",
+    "description": "Version check REST API endpoint for WordPress.",
+    "homepage": "https://rolandbende.com/",
+    "license": "LGPL-3.0-or-later",
     "require-dev": {
         "wp-coding-standards/wpcs": "^3.0",
         "phpcompatibility/phpcompatibility-wp": "*"
-    }
+    },
+    "scripts": {
+        "cs": "phpcs",
+        "test": [
+          "@cs"
+        ]
+      }
 }

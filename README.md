@@ -1,2 +1,4 @@
-# vercheckapi-wp-plugin
+# VerCheck API WordPress Plugin
 Version check REST API endpoint for WordPress.
+
+This plugin adds a custom REST API endpoint that returns information about the current versions of the WordPress core, active themes, and active plugins.
