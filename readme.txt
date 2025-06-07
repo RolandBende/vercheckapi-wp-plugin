@@ -26,7 +26,7 @@ The JSON response includes:
 - A list of active themes with available updates, including their current and latest versions.
 
 **Response example:**
-
+`
   {
     "core": {
       "current_version": "6.4.3",
@@ -42,11 +42,12 @@ The JSON response includes:
     ],
     "outdated_themes": []
   }
+`
 
 **Additional info:**
 The unique request ID for each API call is returned in the response header:
 
-  X-Request-ID: <unique-request-id>
+`X-Request-ID: {{unique-request-id}}`
 
 Useful for remote monitoring, CI/CD checks, and automated update workflows.
 
