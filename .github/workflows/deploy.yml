@@ -1,7 +1,6 @@
 name: Deploy to WordPress.org
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - '*'
@@ -17,3 +16,10 @@ jobs:
 
       - name: Check version consistency
         run: ./scripts/plugin-version-check.sh
+
+      - name: Deploy to WordPress SVN (dry-run)
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: ${{ vars.WP_PLUGIN_SLUG }}
