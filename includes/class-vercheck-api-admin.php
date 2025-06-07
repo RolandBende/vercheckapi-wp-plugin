@@ -12,9 +12,9 @@ class VERCHECK_API_Admin {
 	private $token_option_name;
 
 	public function __construct() {
-		$this->plugin_name       = VC_API_Core::PLUGIN_NAME;
-		$this->plugin_slug       = VC_API_Core::PLUGIN_SLUG;
-		$this->token_option_name = VC_API_Core::SETTING_API_AUTH_TOKEN;
+		$this->plugin_name       = VERCHECK_API_Core::PLUGIN_NAME;
+		$this->plugin_slug       = VERCHECK_API_Core::PLUGIN_SLUG;
+		$this->token_option_name = VERCHECK_API_Core::SETTING_API_AUTH_TOKEN;
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 	}
