@@ -4,7 +4,7 @@ Donate link: https://rolandbende.com/
 Tags: versioncheck, healthcheck
 Requires at least: 5.2
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -59,6 +59,9 @@ Useful for remote monitoring, CI/CD checks, and automated update workflows.
 1. Admin settings
 
 == Changelog ==
+
+= 1.0.1 =
+* PHPCS fixes
 
 = 1.0.0 =
 * Initial release. REST API endpoint and admin token settings.
