@@ -9,23 +9,25 @@ Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl.html
 
-Version check REST API endpoint for WordPress.
+A REST API endpoint for checking WordPress core, theme, and plugin versions.
 
 == Description ==
 
 This plugin adds a custom REST API endpoint that returns information about the current versions of the WordPress core, active themes, and active plugins.
+
+Useful for remote WordPress site version monitoring & logging, CI/CD checks, and automated update workflows.
 
 - **HTTP method:** `GET`  
 - **API endpoint:** `/wp-json/vercheck-api/v1/status`
 
 **Important:** The endpoint requires authentication via a Bearer token.
 
-The JSON response includes:
+The API returns a JSON object with the following data:
 - The current WordPress version.
 - A list of active plugins with available updates, including their current and latest versions.
 - A list of active themes with available updates, including their current and latest versions.
 
-**Response example:**
+**Example response:**
 `
   {
     "core": {
@@ -49,7 +51,6 @@ The unique request ID for each API call is returned in the response header:
 
 `X-Request-ID: {{unique-request-id}}`
 
-Useful for remote monitoring, CI/CD checks, and automated update workflows.
 
 == Screenshots ==
 
