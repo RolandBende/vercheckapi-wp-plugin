@@ -6,7 +6,7 @@
  * @author              Roland Bende
  * @copyright           2025 - Roland Bende
  * @license             GPL-3.0-or-later
- * 
+ *
  * @wordpress-plugin
  * Plugin Name:         VerCheck API
  * Description:         Version check REST API endpoint for WordPress.
@@ -20,19 +20,19 @@
  * Domain Path:         /languages
  */
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
-define('VERCHECK_API_FILE',      __FILE__);
-define('VERCHECK_API_PATH',      realpath(plugin_dir_path(VERCHECK_API_FILE)) . '/');
-define('VERCHECK_API_INC_PATH',  realpath(VERCHECK_API_PATH . 'includes/') . '/');
+define( 'VERCHECK_API_FILE', __FILE__ );
+define( 'VERCHECK_API_PATH', realpath( plugin_dir_path( VERCHECK_API_FILE ) ) . '/' );
+define( 'VERCHECK_API_INC_PATH', realpath( VERCHECK_API_PATH . 'includes/' ) . '/' );
 
-require_once VERCHECK_API_INC_PATH . 'class-vc-api-core.php';
-require_once  VERCHECK_API_INC_PATH . 'class-vc-api-checks.php';
-if (is_admin()) {
-    require_once  VERCHECK_API_INC_PATH . 'class-vc-api-admin.php';
+require_once VERCHECK_API_INC_PATH . 'class-vercheck-api-core.php';
+require_once VERCHECK_API_INC_PATH . 'class-vercheck-api-checks.php';
+if ( is_admin() ) {
+	require_once VERCHECK_API_INC_PATH . 'class-vercheck-api-admin.php';
 }
 
-new VC_API_Core(new VC_API_Checks());
-if (is_admin()) {
-    new VC_API_Admin();
+new VERCHECK_API_Core( new VERCHECK_API_Checks() );
+if ( is_admin() ) {
+	new VERCHECK_API_Admin();
 }

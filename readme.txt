@@ -62,4 +62,3 @@ Useful for remote monitoring, CI/CD checks, and automated update workflows.
 
 = 1.0.0 =
 * Initial release. REST API endpoint and admin token settings.
-
