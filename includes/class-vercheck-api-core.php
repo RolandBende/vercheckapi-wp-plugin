@@ -17,7 +17,6 @@ class VERCHECK_API_Core {
 
 	public function __construct( $checks_instance ) {
 		$this->checks = $checks_instance;
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'rest_api_init', array( $this, 'register_rest_endpoint' ) );
 	}
 
