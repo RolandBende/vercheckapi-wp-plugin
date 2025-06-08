@@ -51,8 +51,8 @@ class VERCHECK_API_Core {
 		$request_id    = $this->generate_request_id();
 		$response_body = array(
 			'core'             => $this->checks->get_core_status(),
-			'outdated_themes'  => $this->checks->get_outdated_plugins(),
-			'outdated_plugins' => $this->checks->get_outdated_themes(),
+			'outdated_themes'  => $this->checks->get_outdated_themes(),
+			'outdated_plugins'  => $this->checks->get_outdated_plugins()
 		);
 		$response      = new WP_REST_Response( $response_body );
 		$response->header( 'X-Request-ID', $request_id );
