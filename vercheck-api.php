@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:         VerCheck API
  * Description:         Version check REST API endpoint for WordPress.
- * Version:             1.0.3
+ * Version:             1.1.0
  * Requires at least:   5.2
  * Requires PHP:        7.4
  * Author:              Roland Bende

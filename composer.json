@@ -6,12 +6,18 @@
     "license": "LGPL-3.0-or-later",
     "require-dev": {
         "wp-coding-standards/wpcs": "^3.0",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
     },
     "scripts": {
         "cs": "phpcs",
         "test": [
           "@cs"
         ]
-      }
+      },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

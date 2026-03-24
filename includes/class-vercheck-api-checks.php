@@ -54,4 +54,54 @@ class VERCHECK_API_Checks {
 
 		return $outdated;
 	}
+
+	public function get_all_themes() {
+		$themes        = wp_get_themes();
+		$theme_updates = get_site_transient( 'update_themes' );
+		$active_theme  = get_stylesheet();
+		$all           = array();
+
+		foreach ( $themes as $slug => $theme ) {
+			$has_update  = isset( $theme_updates->response[ $slug ] );
+			$new_version = $has_update ? $theme_updates->response[ $slug ]['new_version'] : null;
+
+			$all[] = array(
+				'name'            => $theme->get( 'Name' ),
+				'slug'            => $slug,
+				'current_version' => $theme->get( 'Version' ),
+				'new_version'     => $new_version,
+				'is_outdated'     => $has_update,
+				'is_active'       => ( $slug === $active_theme ),
+			);
+		}
+
+		return $all;
+	}
+
+	public function get_all_plugins() {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugins        = get_plugins();
+		$plugin_updates = get_site_transient( 'update_plugins' );
+		$active_plugins = get_option( 'active_plugins', array() );
+		$all            = array();
+
+		foreach ( $plugins as $file => $plugin ) {
+			$has_update  = isset( $plugin_updates->response[ $file ] );
+			$new_version = $has_update ? $plugin_updates->response[ $file ]->new_version : null;
+
+			$all[] = array(
+				'name'            => $plugin['Name'],
+				'slug'            => $file,
+				'current_version' => $plugin['Version'],
+				'new_version'     => $new_version,
+				'is_outdated'     => $has_update,
+				'is_active'       => in_array( $file, $active_plugins, true ),
+			);
+		}
+
+		return $all;
+	}
 }
