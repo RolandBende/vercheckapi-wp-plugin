@@ -1,16 +1,50 @@
 <?php
+/**
+ * Admin class for the VerCheck API plugin.
+ *
+ * Handles the WordPress admin settings page and token management.
+ *
+ * @package VerCheckAPI
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Admin settings class.
+ *
+ * Registers the settings page and manages the API token option.
+ */
 class VERCHECK_API_Admin {
 
 
+	/**
+	 * Human-readable plugin name.
+	 *
+	 * @var string
+	 */
 	private $plugin_name;
+
+	/**
+	 * Plugin slug used for settings page registration.
+	 *
+	 * @var string
+	 */
 	private $plugin_slug;
+
+	/**
+	 * The WP option name used to store the API token.
+	 *
+	 * @var string
+	 */
 	private $token_option_name;
 
+	/**
+	 * Constructor.
+	 *
+	 * Registers admin_menu and admin_init hooks.
+	 */
 	public function __construct() {
 		$this->plugin_name       = VERCHECK_API_Core::PLUGIN_NAME;
 		$this->plugin_slug       = VERCHECK_API_Core::PLUGIN_SLUG;
@@ -19,6 +53,9 @@ class VERCHECK_API_Admin {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 	}
 
+	/**
+	 * Registers the plugin settings page under Settings in WP Admin.
+	 */
 	public function add_settings_page() {
 		add_options_page(
 			// translators: %s is the plugin name.
@@ -30,6 +67,9 @@ class VERCHECK_API_Admin {
 		);
 	}
 
+	/**
+	 * Registers the settings, settings section, and settings field.
+	 */
 	public function register_settings() {
 		register_setting(
 			$this->plugin_slug . '_settings',
@@ -54,6 +94,9 @@ class VERCHECK_API_Admin {
 		);
 	}
 
+	/**
+	 * Renders the settings page HTML.
+	 */
 	public function render_settings_page() {
 		?>
 		<div class="wrap">
@@ -77,6 +120,11 @@ class VERCHECK_API_Admin {
 		<?php
 	}
 
+	/**
+	 * Renders the token input field.
+	 *
+	 * @param array $args Field arguments including optional description.
+	 */
 	public function render_token_field( $args ) {
 		$token = get_option( $this->token_option_name );
 		echo "<input type='text' name='" . esc_attr( $this->token_option_name ) . "' value='" . esc_attr( $token ) . "' size='40' />";
@@ -85,6 +133,12 @@ class VERCHECK_API_Admin {
 		}
 	}
 
+	/**
+	 * Validates and sanitizes the token input before saving.
+	 *
+	 * @param string $input Raw input from the settings form.
+	 * @return string Sanitized token, or empty string on validation failure.
+	 */
 	public function validate_token( $input ) {
 		$input = trim( $input );
 

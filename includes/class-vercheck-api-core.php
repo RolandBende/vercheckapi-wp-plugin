@@ -1,9 +1,22 @@
 <?php
+/**
+ * Core class for the VerCheck API plugin.
+ *
+ * Registers REST API routes and handles authentication.
+ *
+ * @package VerCheckAPI
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Core plugin class.
+ *
+ * Responsible for registering REST endpoints and delegating
+ * authentication and data retrieval.
+ */
 class VERCHECK_API_Core {
 
 	const PLUGIN_NAME            = 'VerCheck API';
@@ -13,13 +26,26 @@ class VERCHECK_API_Core {
 	const API_VERSION            = '1';
 	const SETTING_API_AUTH_TOKEN = self::PLUGIN_TEXT_DOMAIN . '_token';
 
+	/**
+	 * Instance of the checks class.
+	 *
+	 * @var VERCHECK_API_Checks
+	 */
 	private $checks;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param VERCHECK_API_Checks $checks_instance Instance of the checks class.
+	 */
 	public function __construct( $checks_instance ) {
 		$this->checks = $checks_instance;
 		add_action( 'rest_api_init', array( $this, 'register_rest_endpoint' ) );
 	}
 
+	/**
+	 * Registers all REST API routes for this plugin.
+	 */
 	public function register_rest_endpoint() {
 		$namespace = self::API_BASE_ROUTE . '/v' . self::API_VERSION;
 
@@ -44,6 +70,14 @@ class VERCHECK_API_Core {
 		);
 	}
 
+	/**
+	 * Validates the Bearer token from the Authorization header.
+	 *
+	 * Used as the permission_callback for all REST routes.
+	 *
+	 * @param WP_REST_Request $request The incoming REST request.
+	 * @return true|WP_Error True on success, WP_Error on failure.
+	 */
 	public function verify_bearer_token( $request ) {
 		$auth_header    = $request->get_header( 'authorization' );
 		$provided_token = null;
@@ -61,14 +95,22 @@ class VERCHECK_API_Core {
 		return true;
 	}
 
-	public function handle_status_request( $request ) {
+	/**
+	 * Handles GET /status requests.
+	 *
+	 * Returns only items that have available updates (core, themes, plugins).
+	 *
+	 * @param WP_REST_Request $request The incoming REST request.
+	 * @return WP_REST_Response
+	 */
+	public function handle_status_request( $request ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- Required by WP REST API callback signature.
 		require_once ABSPATH . 'wp-admin/includes/update.php';
 		wp_update_themes();
 		wp_update_plugins();
 
 		$response_body = array(
-			'core'            => $this->checks->get_core_status(),
-			'outdated_themes' => $this->checks->get_outdated_themes(),
+			'core'             => $this->checks->get_core_status(),
+			'outdated_themes'  => $this->checks->get_outdated_themes(),
 			'outdated_plugins' => $this->checks->get_outdated_plugins(),
 		);
 
@@ -78,7 +120,15 @@ class VERCHECK_API_Core {
 		return $response;
 	}
 
-	public function handle_audit_request( $request ) {
+	/**
+	 * Handles GET /audit requests.
+	 *
+	 * Returns a full inventory of all installed themes and plugins with version info.
+	 *
+	 * @param WP_REST_Request $request The incoming REST request.
+	 * @return WP_REST_Response
+	 */
+	public function handle_audit_request( $request ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- Required by WP REST API callback signature.
 		require_once ABSPATH . 'wp-admin/includes/update.php';
 		wp_update_themes();
 		wp_update_plugins();
@@ -95,6 +145,11 @@ class VERCHECK_API_Core {
 		return $response;
 	}
 
+	/**
+	 * Generates a unique request ID for the response header.
+	 *
+	 * @return string UUID v4 string.
+	 */
 	private function generate_request_id() {
 		return wp_generate_uuid4();
 	}

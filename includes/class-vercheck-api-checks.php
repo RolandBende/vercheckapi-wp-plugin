@@ -1,11 +1,30 @@
 <?php
+/**
+ * Checks class for the VerCheck API plugin.
+ *
+ * Provides methods for retrieving version and update status
+ * for WordPress core, themes, and plugins.
+ *
+ * @package VerCheckAPI
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Data retrieval class.
+ *
+ * Encapsulates all logic for fetching version information
+ * from the WordPress update API.
+ */
 class VERCHECK_API_Checks {
 
+	/**
+	 * Returns the current WordPress core version and update status.
+	 *
+	 * @return array{current_version: string, new_version: string|null, is_outdated: bool}
+	 */
 	public function get_core_status() {
 		global $wp_version;
 		$core_update = get_core_updates();
@@ -17,6 +36,11 @@ class VERCHECK_API_Checks {
 		);
 	}
 
+	/**
+	 * Returns a list of active themes that have available updates.
+	 *
+	 * @return array<int, array{name: string, current_version: string, new_version: string}>
+	 */
 	public function get_outdated_themes() {
 		$themes        = wp_get_themes();
 		$theme_updates = get_site_transient( 'update_themes' );
@@ -36,6 +60,11 @@ class VERCHECK_API_Checks {
 		return $outdated;
 	}
 
+	/**
+	 * Returns a list of active plugins that have available updates.
+	 *
+	 * @return array<int, array{name: string, current_version: string, new_version: string}>
+	 */
 	public function get_outdated_plugins() {
 		$plugin_updates = get_site_transient( 'update_plugins' );
 		$plugins        = get_plugins();
@@ -55,6 +84,11 @@ class VERCHECK_API_Checks {
 		return $outdated;
 	}
 
+	/**
+	 * Returns all installed themes with their version and update status.
+	 *
+	 * @return array<int, array{name: string, slug: string, current_version: string, new_version: string|null, is_outdated: bool, is_active: bool}>
+	 */
 	public function get_all_themes() {
 		$themes        = wp_get_themes();
 		$theme_updates = get_site_transient( 'update_themes' );
@@ -78,6 +112,11 @@ class VERCHECK_API_Checks {
 		return $all;
 	}
 
+	/**
+	 * Returns all installed plugins with their version and update status.
+	 *
+	 * @return array<int, array{name: string, slug: string, current_version: string, new_version: string|null, is_outdated: bool, is_active: bool}>
+	 */
 	public function get_all_plugins() {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
